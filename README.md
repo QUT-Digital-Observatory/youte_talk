@@ -5,25 +5,7 @@ YouTube has built-in support for video subtitles but it is not always available,
 
 YouTalk uses [youtube-dl](https://github.com/ytdl-org/youtube-dl) to download the audio from a YouTube video. It then uses [Whisper](https://github.com/openai/whisper) speech recognition system from OpenAI to produce a transcript. This is a large model that is trained on a large corpus of audio data which achieves results comparable with human transcribers. See [paper](https://arxiv.org/abs/2212.04356).
 
-Depending on the output desired, YouTalk may transform the text output of Whisper into a CSV or JSON file.
-
-## Whisper and performance
-
-OpenAI offer Whisper as a cloud service. This costs money and requires an API key. YouTalk uses a local installation of Whisper which is free and does not require an API key. Additionally, the cloud service leaks data between sessions, e.g. you may receive parts of someone elses' transcript. 
-
-The down side is that Whisper requires a fair volume of disk space, is computationally expensive, and is not particularly fast. It benefits greatly from a GPU, but does not require one.
-
-On first run, Whisper will download a language model. YouTalk defaults to using the 'small' multi-lingual model with a model size of around 250MB, and requiring around 2GB of VRAM on a GPU. 
-The size of the model affects the accuracy and resource consumption. Larger models are dramatically slower, but have smaller improvements in accuracy. See the [table](https://github.com/openai/whisper) on the Whisper README for model sizes and relative performance.
-
-There's also the option of running Whisper on a CPU. This is much slower, but this doesn't require a GPU at all and is quite useful if you have insufficient memory to run a larger model. Modern systems can still transcribe at better than real-time even with the large model. Some examples drawn on an Intel i7-12700 laptop and a 4GB Nvidia RTX 3050 GPU transcribing a short 4 minute video:
-
-* CPU, small model: 0m 46s
-* GPU, small model: 0m 16s
-* CPU, medium model: 2m 3s
-* CPU, large model: 3m 30s
-
-Note, you can always try to transcribe a video with a larger model on GPU, and if it fails due to memory constraints, just re-run the command with the `--cpu` switch.
+YouTalk outputs the transcript as plain text (with no time stamps) or time-stamped SRT text caption format. It can also output JSON and CSV, both with time stamps.
 
 ## Installing
 
@@ -48,3 +30,25 @@ Options:
   --cpu                           Use the CPU instead of the GPU
   --help                          Show this message and exit.
 ```
+
+Note, if using the --saveaudio switch, the audio file will be saved in the current working directory with the name `videoId.webm`.
+If you run YouTalk again on the same video, it will not download the audio again, but will use the existing file.
+
+## Whisper and performance
+
+YouTalk uses a local installation of Whisper which is free and does not require an API key. 
+On first run, Whisper will download a language model. YouTalk defaults to using the 'small' multi-lingual model with a model size of around 250MB, and requiring around 2GB of VRAM on a modern GPU.
+
+Models with a .en suffix are English only and perform better than the multilingual variants. The difference between English and multi-lingual variants is less apparent for the larger models.
+
+Larger models are more accurate but are much slower, and are unlikely to fit on common GPUs. See the [table](https://github.com/openai/whisper) on the Whisper README for model sizes and relative performance.
+
+There's also the option of running Whisper on a CPU. This is much slower, but this doesn't require a GPU at all and is quite useful if you have insufficient memory to run a larger model. Modern systems can still transcribe at better than real-time even with the large model. Some examples drawn on an Intel i7-12700 laptop and a 4GB Nvidia RTX 3050 GPU transcribing a short 4 minute video:
+
+* CPU, small model: 0m 46s
+* GPU, small model: 0m 16s
+* CPU, medium model: 2m 3s
+* CPU, large model: 3m 30s
+
+Note, you can always try on the GPU first, and if it fails due to memory constraints (you will see a cuda memory allocation error), just re-run the command with the `--cpu` switch.
+
