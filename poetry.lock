@@ -1,4 +1,19 @@
 [[package]]
+name = "beautifulsoup4"
+version = "4.12.2"
+description = "Screen-scraping library"
+category = "main"
+optional = false
+python-versions = ">=3.6.0"
+
+[package.dependencies]
+soupsieve = ">1.2"
+
+[package.extras]
+html5lib = ["html5lib"]
+lxml = ["lxml"]
+
+[[package]]
 name = "certifi"
 version = "2023.5.7"
 description = "Python package for providing Mozilla's CA Bundle."
@@ -229,6 +244,14 @@ socks = ["PySocks (>=1.5.6,!=1.5.7)"]
 use_chardet_on_py3 = ["chardet (>=3.0.2,<6)"]
 
 [[package]]
+name = "soupsieve"
+version = "2.4.1"
+description = "A modern CSS selector implementation for Beautiful Soup."
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[[package]]
 name = "sympy"
 version = "1.12"
 description = "Computer algebra system (CAS) in Python"
@@ -347,9 +370,10 @@ resolved_reference = "b8a86dcf1aa837577178ae25357d8241ab4ba6c1"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "31307a3ff539451d7dec5eec2fa2938632fc1d66454d30e3867e908aa99e295c"
+content-hash = "bf65dd5f7d9e9eb7fe02f011b284e1da28c2e9c5d54f3afceda63e4ed1572d37"
 
 [metadata.files]
+beautifulsoup4 = []
 certifi = []
 charset-normalizer = []
 click = []
@@ -371,6 +395,7 @@ numpy = []
 openai-whisper = []
 regex = []
 requests = []
+soupsieve = []
 sympy = []
 tiktoken = []
 torch = []

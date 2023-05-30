@@ -3,29 +3,34 @@ Copyright: Digital Observatory 2023 <digitalobservatory@qut.edu.au>
 Author: Mat Bettinson <mat.bettinson@qut.edu.au>
 """
 from time import time
-#from youtalk.scraper import makeElapsedString, getVideoDetails
+from youte_talk.scraper import get_VideoDetails
 from os import remove, rename
-#from youtalk.whisper import whisperTranscribe
+from youte_talk.whisper import whisper_transcribe
 #from youtalk.parser import parse_srt
 import youtube_dl
+from datetime import timedelta
 
 class Transcriber:
-    def __init__(self, url: str, output: str, fformat: str, saveaudio: bool, apikey:str):
+    def __init__(self, url: str, output: str, fformat: str, saveaudio: bool):
         """Set up a Transcription job"""
         print('url:', url)
         self.url = url
         self.output = output
         self.format = fformat
         self.saveaudio = saveaudio
-        self.apikey = apikey
         self.fileext = 'txt' if fformat == 'text' else fformat
 
+    def get_elapsed(self, start: float, end: float) -> str:
+        return str(timedelta(seconds=round(end-start)))
+
     def transcribe(self):
-        return
         """Execute the transcription job, saving output as appropriate"""
         starttime = time()
-        videodetails = getVideoDetails(self.url)
-        print("Got metadata in", makeElapsedString(starttime, time()))
+        videodetails = get_VideoDetails(self.url)
+        if videodetails is None:
+            print("Failed to get video details")
+            return
+        print("Got metadata in", self.get_elapsed(starttime, time()))
         prompt = videodetails.title + ': ' + videodetails.shortDescription # Will feed to Whisper API
         ydl_opts = {
             'format': 'worstaudio[ext=webm]',
@@ -35,11 +40,11 @@ class Transcriber:
             ydl.download([self.url])
         # <id>.webm in the current directory now
         sourcefilename = videodetails.videoId + '.webm'
-        print("Downloaded in", makeElapsedString(starttime, time()))
+        print("Downloaded in", self.get_elapsed(starttime, time()))
         starttime = time()
         print("Transcribing...")
-        transcript = whisperTranscribe(sourcefilename, prompt, self.apikey, self.format)
-        print("Whisper transcribed in", makeElapsedString(starttime, time()))
+        transcript = whisper_transcribe(sourcefilename, prompt, self.format)
+        print("Whisper transcribed in", self.get_elapsed(starttime, time()))
         outputfilename = self.output + '.' + self.fileext
         outputdata = transcript # Use plain text if output is srt or text
         if self.format == 'json':
