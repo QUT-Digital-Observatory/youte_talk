@@ -37,7 +37,7 @@ class WhisperTranscribe:
 
     @property
     def text(self) -> str:
-        return ' '.join([segment['text'] for segment in self.segmentlist])
+        return ''.join([segment['text'] for segment in self.segmentlist])
     
     @property
     def json(self) -> str:
@@ -45,9 +45,9 @@ class WhisperTranscribe:
         for segment in self.segmentlist:
             objlist.append({
                 'id': segment['id'],
-                'start': segment['start'],
-                'end': segment['end'],
-                'text': segment['text']
+                'start': round(segment['start'], 2),
+                'end': round(segment['end'], 2),
+                'text': segment['text'].strip()
             })
         return json.dumps(objlist)
     
@@ -57,9 +57,9 @@ class WhisperTranscribe:
         for segment in self.segmentlist:
             short_segments.append(Segment(
                 id=segment['id'],
-                start=segment['start'],
-                end=segment['end'],
-                text=segment['text']
+                start=round(segment['start'], 2),
+                end=round(segment['end'], 2),
+                text=segment['text'].strip()
             ))
         return short_segments
     
@@ -70,7 +70,12 @@ class WhisperTranscribe:
             writer = csv.DictWriter(output, fieldnames=['id', 'start', 'end', 'text'], quoting=csv.QUOTE_ALL)
             writer.writeheader()
             for segment in self.segmentlist:
-                seg = segment.copy()
+                seg = {
+                    'id': segment['id'],
+                    'start': round(segment['start'], 2),
+                    'end': round(segment['end'], 2),
+                    'text': segment['text'].strip()
+                }
                 # encode special characters in the 'text' field
                 seg['text'] = seg['text'].encode('unicode_escape').decode('utf-8')
                 writer.writerow(seg)
@@ -107,6 +112,6 @@ class WhisperTranscribe:
                 str_end_time = str_end_time + ',000'
 
             # Add index, time range, and text to the string
-            srt_str += f"{i+1}\n{str_start_time} --> {str_end_time}\n{segment['text']}\n\n"
+            srt_str += f"{i+1}\n{str_start_time} --> {str_end_time}\n{segment['text'].strip()}\n\n"
 
         return srt_str

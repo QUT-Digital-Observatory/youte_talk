@@ -4,7 +4,7 @@ Author: Mat Bettinson <mat.bettinson@qut.edu.au>
 """
 from time import time
 from youte_talk.scraper import get_VideoDetails
-from os import remove, rename
+from os import remove, rename, path
 from youte_talk.whisper import WhisperTranscribe
 #from youtalk.parser import parse_srt
 import youtube_dl
@@ -36,11 +36,13 @@ class Transcriber:
             'format': 'worstaudio[ext=webm]',
             'outtmpl': '%(id)s.%(ext)s'
         }
-        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-            ydl.download([self.url])
-        # <id>.webm in the current directory now
         sourcefilename = videodetails.videoId + '.webm'
-        print("Downloaded in", self.get_elapsed(starttime, time()))
+        if not path.isfile(sourcefilename):
+            starttime = time()
+            with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+                ydl.download([self.url])
+            print("Downloaded in", self.get_elapsed(starttime, time()))
+        # <id>.webm in the current directory now
         starttime = time()
         print("Transcribing...")
         transcription = WhisperTranscribe(sourcefilename, prompt)
