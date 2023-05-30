@@ -1,13 +1,19 @@
-# YouTalk: a command-line tool to transcribe YouTube videos
+# YouTalk: a tool for transcribing YouTube videos
 
-YouTalk is a simple command line program for transcribing YouTube videos. 
-YouTube has built-in support for video subtitles but it is not always available, and the quality of the automatic subtitles is far short of the state-of-the-art for speech to text systems.
+YouTalk is a simple command line program for transcribing YouTube videos. That is, it downloads the audio from a YouTube video and produces a transcript in a variety of formats including plain text, time-stamped SRT text caption format, JSON and CSV.
 
-YouTalk uses [youtube-dl](https://github.com/ytdl-org/youtube-dl) to download the audio from a YouTube video. It then uses [Whisper](https://github.com/openai/whisper) speech recognition system from OpenAI to produce a transcript. This is a large model that is trained on a large corpus of audio data which achieves results comparable with human transcribers. See [paper](https://arxiv.org/abs/2212.04356).
+## Why YouTalk?
 
-YouTalk outputs the transcript as plain text (with no time stamps) or time-stamped SRT text caption format. It can also output JSON and CSV, both with time stamps.
+There is a need for high quality automatic transcription of YouTube videos, particularly for research use cases. 
+This can be accomplished by some tools which download the subtitle captions from YouTube. That's fine if the video has been captioned professionally, but that is not usually available for user-generated content. 
+
+YouTube has automatic subtitles, but uploaders need to enable this feature. The quality of automatic captions is low compared to state-of-the-art for speech to text systems. This means transcripts need substantial editing to be useful.
+
+YouTalk uses [youtube-dl](https://github.com/ytdl-org/youtube-dl) to download the audio from a YouTube video. It then uses the [Whisper](https://github.com/openai/whisper) speech recognition system from OpenAI to produce a transcript. Whisper is is a state-of-the-art speech to text system that achieves results comparable with human transcribers. See [paper](https://arxiv.org/abs/2212.04356). 
 
 ## Installing
+
+YouTalk requires Python 3.10 or later. It is recommended to use a virtual environment.
 
 `pip install youte-text`
 
