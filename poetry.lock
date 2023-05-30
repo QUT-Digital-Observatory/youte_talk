@@ -1,0 +1,381 @@
+[[package]]
+name = "certifi"
+version = "2023.5.7"
+description = "Python package for providing Mozilla's CA Bundle."
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[[package]]
+name = "charset-normalizer"
+version = "3.1.0"
+description = "The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet."
+category = "main"
+optional = false
+python-versions = ">=3.7.0"
+
+[[package]]
+name = "click"
+version = "8.1.3"
+description = "Composable command line interface toolkit"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+colorama = {version = "*", markers = "platform_system == \"Windows\""}
+
+[[package]]
+name = "cmake"
+version = "3.26.3"
+description = "CMake is an open-source, cross-platform family of tools designed to build, test and package software"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.extras]
+test = ["codecov (>=2.0.5)", "coverage (>=4.2)", "flake8 (>=3.0.4)", "path.py (>=11.5.0)", "pytest (>=3.0.3)", "pytest-cov (>=2.4.0)", "pytest-runner (>=2.9)", "pytest-virtualenv (>=1.7.0)", "scikit-build (>=0.10.0)", "setuptools (>=28.0.0)", "virtualenv (>=15.0.3)", "wheel"]
+
+[[package]]
+name = "colorama"
+version = "0.4.6"
+description = "Cross-platform colored terminal text."
+category = "main"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7"
+
+[[package]]
+name = "ffmpeg-python"
+version = "0.2.0"
+description = "Python bindings for FFmpeg - with complex filtering support"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+future = "*"
+
+[package.extras]
+dev = ["future (==0.17.1)", "numpy (==1.16.4)", "pytest-mock (==1.10.4)", "pytest (==4.6.1)", "Sphinx (==2.1.0)", "tox (==3.12.1)"]
+
+[[package]]
+name = "filelock"
+version = "3.12.0"
+description = "A platform independent file lock."
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.extras]
+docs = ["furo (>=2023.3.27)", "sphinx-autodoc-typehints (>=1.23,!=1.23.4)", "sphinx (>=6.1.3)"]
+testing = ["covdefaults (>=2.3)", "coverage (>=7.2.3)", "diff-cover (>=7.5)", "pytest-cov (>=4)", "pytest-mock (>=3.10)", "pytest-timeout (>=2.1)", "pytest (>=7.3.1)"]
+
+[[package]]
+name = "future"
+version = "0.18.3"
+description = "Clean single-source support for Python 3 and 2"
+category = "main"
+optional = false
+python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
+
+[[package]]
+name = "idna"
+version = "3.4"
+description = "Internationalized Domain Names in Applications (IDNA)"
+category = "main"
+optional = false
+python-versions = ">=3.5"
+
+[[package]]
+name = "jinja2"
+version = "3.1.2"
+description = "A very fast and expressive template engine."
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+MarkupSafe = ">=2.0"
+
+[package.extras]
+i18n = ["Babel (>=2.7)"]
+
+[[package]]
+name = "lit"
+version = "16.0.5"
+description = "A Software Testing Tool"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "llvmlite"
+version = "0.40.0"
+description = "lightweight wrapper around basic LLVM functionality"
+category = "main"
+optional = false
+python-versions = ">=3.8"
+
+[[package]]
+name = "markupsafe"
+version = "2.1.2"
+description = "Safely add untrusted strings to HTML/XML markup."
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[[package]]
+name = "more-itertools"
+version = "9.1.0"
+description = "More routines for operating on iterables, beyond itertools"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[[package]]
+name = "mpmath"
+version = "1.3.0"
+description = "Python library for arbitrary-precision floating-point arithmetic"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.extras]
+develop = ["pytest (>=4.6)", "pycodestyle", "pytest-cov", "codecov", "wheel"]
+docs = ["sphinx"]
+gmpy = ["gmpy2 (>=2.1.0a4)"]
+tests = ["pytest (>=4.6)"]
+
+[[package]]
+name = "networkx"
+version = "3.1"
+description = "Python package for creating and manipulating graphs and networks"
+category = "main"
+optional = false
+python-versions = ">=3.8"
+
+[package.extras]
+default = ["numpy (>=1.20)", "scipy (>=1.8)", "matplotlib (>=3.4)", "pandas (>=1.3)"]
+developer = ["pre-commit (>=3.2)", "mypy (>=1.1)"]
+doc = ["sphinx (>=6.1)", "pydata-sphinx-theme (>=0.13)", "sphinx-gallery (>=0.12)", "numpydoc (>=1.5)", "pillow (>=9.4)", "nb2plots (>=0.6)", "texext (>=0.6.7)"]
+extra = ["lxml (>=4.6)", "pygraphviz (>=1.10)", "pydot (>=1.4.2)", "sympy (>=1.10)"]
+test = ["pytest (>=7.2)", "pytest-cov (>=4.0)", "codecov (>=2.1)"]
+
+[[package]]
+name = "numba"
+version = "0.57.0"
+description = "compiling Python code using LLVM"
+category = "main"
+optional = false
+python-versions = ">=3.8"
+
+[package.dependencies]
+llvmlite = ">=0.40.0dev0,<0.41"
+numpy = ">=1.21,<1.25"
+
+[[package]]
+name = "numpy"
+version = "1.24.3"
+description = "Fundamental package for array computing in Python"
+category = "main"
+optional = false
+python-versions = ">=3.8"
+
+[[package]]
+name = "openai-whisper"
+version = "20230314"
+description = "Robust Speech Recognition via Large-Scale Weak Supervision"
+category = "main"
+optional = false
+python-versions = ">=3.8"
+
+[package.dependencies]
+ffmpeg-python = "0.2.0"
+more-itertools = "*"
+numba = "*"
+numpy = "*"
+tiktoken = "0.3.1"
+torch = "*"
+tqdm = "*"
+triton = "2.0.0"
+
+[package.extras]
+dev = ["pytest", "scipy", "black", "flake8", "isort"]
+
+[[package]]
+name = "regex"
+version = "2023.5.5"
+description = "Alternative regular expression module, to replace re."
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[[package]]
+name = "requests"
+version = "2.31.0"
+description = "Python HTTP for Humans."
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+certifi = ">=2017.4.17"
+charset-normalizer = ">=2,<4"
+idna = ">=2.5,<4"
+urllib3 = ">=1.21.1,<3"
+
+[package.extras]
+socks = ["PySocks (>=1.5.6,!=1.5.7)"]
+use_chardet_on_py3 = ["chardet (>=3.0.2,<6)"]
+
+[[package]]
+name = "sympy"
+version = "1.12"
+description = "Computer algebra system (CAS) in Python"
+category = "main"
+optional = false
+python-versions = ">=3.8"
+
+[package.dependencies]
+mpmath = ">=0.19"
+
+[[package]]
+name = "tiktoken"
+version = "0.3.1"
+description = "tiktoken is a fast BPE tokeniser for use with OpenAI's models"
+category = "main"
+optional = false
+python-versions = ">=3.8"
+
+[package.dependencies]
+regex = ">=2022.1.18"
+requests = ">=2.26.0"
+
+[package.extras]
+blobfile = ["blobfile (>=2)"]
+
+[[package]]
+name = "torch"
+version = "2.0.1"
+description = "Tensors and Dynamic neural networks in Python with strong GPU acceleration"
+category = "main"
+optional = false
+python-versions = ">=3.8.0"
+
+[package.dependencies]
+filelock = "*"
+jinja2 = "*"
+networkx = "*"
+sympy = "*"
+typing-extensions = "*"
+
+[package.extras]
+opt-einsum = ["opt-einsum (>=3.3)"]
+
+[[package]]
+name = "tqdm"
+version = "4.65.0"
+description = "Fast, Extensible Progress Meter"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+colorama = {version = "*", markers = "platform_system == \"Windows\""}
+
+[package.extras]
+dev = ["py-make (>=0.1.0)", "twine", "wheel"]
+notebook = ["ipywidgets (>=6)"]
+slack = ["slack-sdk"]
+telegram = ["requests"]
+
+[[package]]
+name = "triton"
+version = "2.0.0"
+description = "A language and compiler for custom Deep Learning operations"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+cmake = "*"
+filelock = "*"
+lit = "*"
+torch = "*"
+
+[package.extras]
+tests = ["autopep8", "flake8", "isort", "numpy", "pytest", "scipy (>=1.7.1)"]
+tutorials = ["matplotlib", "pandas", "tabulate"]
+
+[[package]]
+name = "typing-extensions"
+version = "4.6.2"
+description = "Backported and Experimental Type Hints for Python 3.7+"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[[package]]
+name = "urllib3"
+version = "2.0.2"
+description = "HTTP library with thread-safe connection pooling, file post, and more."
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.extras]
+brotli = ["brotli (>=1.0.9)", "brotlicffi (>=0.8.0)"]
+secure = ["certifi", "cryptography (>=1.9)", "idna (>=2.0.0)", "pyopenssl (>=17.1.0)", "urllib3-secure-extra"]
+socks = ["pysocks (>=1.5.6,!=1.5.7,<2.0)"]
+zstd = ["zstandard (>=0.18.0)"]
+
+[[package]]
+name = "youtube-dl"
+version = "2021.12.17"
+description = "YouTube video downloader"
+category = "main"
+optional = false
+python-versions = "*"
+develop = false
+
+[package.source]
+type = "git"
+url = "https://github.com/ytdl-org/youtube-dl.git"
+reference = "master"
+resolved_reference = "b8a86dcf1aa837577178ae25357d8241ab4ba6c1"
+
+[metadata]
+lock-version = "1.1"
+python-versions = "^3.10"
+content-hash = "31307a3ff539451d7dec5eec2fa2938632fc1d66454d30e3867e908aa99e295c"
+
+[metadata.files]
+certifi = []
+charset-normalizer = []
+click = []
+cmake = []
+colorama = []
+ffmpeg-python = []
+filelock = []
+future = []
+idna = []
+jinja2 = []
+lit = []
+llvmlite = []
+markupsafe = []
+more-itertools = []
+mpmath = []
+networkx = []
+numba = []
+numpy = []
+openai-whisper = []
+regex = []
+requests = []
+sympy = []
+tiktoken = []
+torch = []
+tqdm = []
+triton = []
+typing-extensions = []
+urllib3 = []
+youtube-dl = []
