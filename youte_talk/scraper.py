@@ -10,7 +10,7 @@ class VideoDetails:
     title: str
     shortDescription: str
     lengthSeconds: int
-    keywords: list[str]
+    keywords: list[str] | None
     channelId: str
     author: str
     viewcount: int
@@ -27,10 +27,11 @@ def get_VideoDetails(url: str) -> VideoDetails | None:
     # Find body tag and then find next sibling script tag
     body = soup.body
     assert body is not None
-    script = body.find_next_sibling('script')
+    script = body.find('script')
 
     # If script tag is not found, return None
     if script is None:
+        print('Script tag not found')
         return None
 
     # Extract JavaScript object using regex
@@ -38,6 +39,7 @@ def get_VideoDetails(url: str) -> VideoDetails | None:
     
     # If object is not found, return None
     if match is None:
+        print('JavaScript object not found')
         return None
 
     # Decode the JavaScript object into a Python dictionary
@@ -48,7 +50,7 @@ def get_VideoDetails(url: str) -> VideoDetails | None:
         title=vd['title'],
         shortDescription=vd['shortDescription'],
         lengthSeconds=int(vd['lengthSeconds']),
-        keywords=vd['keywords'],
+        keywords=vd['keywords'] if 'keywords' in vd else None,
         channelId=vd['channelId'],
         author=vd['author'],
         viewcount=int(vd['viewCount'])

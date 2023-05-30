@@ -15,20 +15,17 @@ def transcribe(*args):
 @click.command()
 @click.argument('url')
 @click.option('--output', default=None, help="File name without an extension (extension determined by format), defaults to videoId")
-@click.option('--format', type=click.Choice(['text', 'srt', 'json'], case_sensitive=False), default="text", help="Format of output file: text, srt or json")
+@click.option('--format', type=click.Choice(['text', 'srt', 'csv', 'json'], case_sensitive=False), default="text", help="Format of output file: text, srt or json")
 @click.option("--saveaudio", is_flag=True, show_default=True, default=False, help="Save the audio stream to a webm file")
-def main(url: str, output: str, format: str, saveaudio: bool, apikey: str):
+def main(url: str, output: str, format: str, saveaudio: bool):
     """YouTalk: A command-line YouTube video transcriber using Whisper"""
     if not url.startswith('https://youtube.com/watch?v=') and not url.startswith('https://www.youtube.com/watch?v='):
         print("Youtube video URLs look like https://youtube.com/watch?v=...")
         exit(1)
-    if apikey is None:
-        print("Please provide an OpenAI API Key, either in an .env file or as an --apikey option")
-        exit(1)
     if output is None:
         output = url.split('=')[-1]
 
-    transcribe(url, output, format, saveaudio, apikey)
+    transcribe(url, output, format, saveaudio)
 
 if __name__ == "__main__":
     main()

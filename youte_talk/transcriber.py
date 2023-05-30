@@ -5,7 +5,7 @@ Author: Mat Bettinson <mat.bettinson@qut.edu.au>
 from time import time
 from youte_talk.scraper import get_VideoDetails
 from os import remove, rename
-from youte_talk.whisper import whisper_transcribe
+from youte_talk.whisper import WhisperTranscribe
 #from youtalk.parser import parse_srt
 import youtube_dl
 from datetime import timedelta
@@ -43,13 +43,20 @@ class Transcriber:
         print("Downloaded in", self.get_elapsed(starttime, time()))
         starttime = time()
         print("Transcribing...")
-        transcript = whisper_transcribe(sourcefilename, prompt, self.format)
+        transcription = WhisperTranscribe(sourcefilename, prompt)
         print("Whisper transcribed in", self.get_elapsed(starttime, time()))
         outputfilename = self.output + '.' + self.fileext
-        outputdata = transcript # Use plain text if output is srt or text
-        if self.format == 'json':
-            caption = parse_srt(transcript) # Otherwise use the parsed SRT
-            outputdata = caption.json() # And use the json serialised format for it
+        outputdata = None
+        match self.format:
+            case 'text':
+                outputdata = transcription.text
+            case 'srt':
+                outputdata = transcription.srt
+            case 'json':
+                outputdata = transcription.json
+            case 'csv':
+                outputdata = transcription.csv
+        assert outputdata is not None
         with open(outputfilename, 'w') as f:
             f.write(outputdata)
         # clean up
