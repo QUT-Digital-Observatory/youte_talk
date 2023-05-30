@@ -11,14 +11,16 @@ import youtube_dl
 from datetime import timedelta
 
 class Transcriber:
-    def __init__(self, url: str, output: str, fformat: str, saveaudio: bool):
+    def __init__(self, url: str, output: str, model: str, fformat: str, saveaudio: bool, cpu: bool):
         """Set up a Transcription job"""
         print('url:', url)
         self.url = url
         self.output = output
+        self.model = model
         self.format = fformat
         self.saveaudio = saveaudio
         self.fileext = 'txt' if fformat == 'text' else fformat
+        self.cpu = cpu
 
     def get_elapsed(self, start: float, end: float) -> str:
         return str(timedelta(seconds=round(end-start)))
@@ -45,7 +47,7 @@ class Transcriber:
         # <id>.webm in the current directory now
         starttime = time()
         print("Transcribing...")
-        transcription = WhisperTranscribe(sourcefilename, prompt)
+        transcription = WhisperTranscribe(sourcefilename, prompt, self.model, self.cpu)
         print("Whisper transcribed in", self.get_elapsed(starttime, time()))
         outputfilename = self.output + '.' + self.fileext
         outputdata = None

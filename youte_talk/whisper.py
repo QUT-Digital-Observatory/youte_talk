@@ -27,9 +27,9 @@ class Segment:
     text: str
 
 class WhisperTranscribe:
-    def __init__(self, sourcefile: str, prompt: str | None = None, modelname: str = "small"):
+    def __init__(self, sourcefile: str, prompt: str | None = None, modelname: str = "small", cpu: bool = False):
         self.segmentlist = []
-        model = whisper.load_model(modelname)
+        model = whisper.load_model(modelname, device='cpu' if cpu else 'cuda')
         # This doesn't return what OpenAI says it does
         result = model.transcribe(sourcefile, initial_prompt=prompt)
         # It returns a dict, and we will store the verbose segments structure
@@ -49,7 +49,7 @@ class WhisperTranscribe:
                 'end': round(segment['end'], 2),
                 'text': segment['text'].strip()
             })
-        return json.dumps(objlist)
+        return json.dumps(objlist, indent=2)
     
     @property
     def segments(self) -> list[Segment]:
