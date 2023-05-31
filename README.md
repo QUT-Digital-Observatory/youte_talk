@@ -60,11 +60,11 @@ Note, you can always try on the GPU first, and if it fails due to memory constra
 
 ## Installing from Git (for dev etc)
 
-`git clone https://github.com/QUT-Digital-Observatory/youte_talk.git`
-`cd youte_talk`
-`python3 -m venv venv`
-`source venv/bin/activate`
-`pip install -e .`
+- `git clone https://github.com/QUT-Digital-Observatory/youte_talk.git`
+- `cd youte_talk`
+- `python3 -m venv venv`
+- `source venv/bin/activate`
+- `pip install -e .`
 
 ## Using as a Python module
 
