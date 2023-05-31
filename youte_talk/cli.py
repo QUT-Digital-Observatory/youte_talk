@@ -6,6 +6,10 @@ import click
 from sys import exit
 import subprocess
 import os
+import warnings
+warnings.filterwarnings("ignore", message=".*The 'nopython' keyword.*")
+warnings.filterwarnings("ignore", message=".*FP16 is not supported on CPU.*")
+warnings.filterwarnings("ignore", message=".*Performing inference on CPU when CUDA is available.*")
 
 def transcribe(*args):
     from youte_talk.transcriber import Transcriber
