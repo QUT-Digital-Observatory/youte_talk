@@ -23,7 +23,7 @@ def transcribe(*args):
 
     trans = Transcriber(*args)
     trans.transcribe()
-    print("Done!")
+    click.echo("Done!")
 
 
 def is_ffmpeg_available():
@@ -94,11 +94,13 @@ def main(url: str, output: str, model: str, format: str, saveaudio: bool, cpu: b
         )
 
     if not is_ffmpeg_available():
-        print("\nYoute_Talk requires ffmpeg but it is not available!\n")
-        print(" - See https://ffmpeg.org/download.html for installation instructions")
-        print(" - On Windows, you may need to add ffmpeg to your PATH")
-        print(" - On Linux, you may need to install ffmpeg with your package manager")
-        exit(1)
+        click.echo(
+            "\nYoute_Talk requires ffmpeg but it is not available!\n"
+            " - See https://ffmpeg.org/download.html for installation instructions\n"
+            " - On Windows, you may need to add ffmpeg to your PATH\n"
+            " - On Linux, you may need to install ffmpeg with your package manager\n"
+        )
+        raise click.Abort
 
     transcribe(url, output, model, format, saveaudio, cpu)
 
