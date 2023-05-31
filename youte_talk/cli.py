@@ -26,9 +26,6 @@ def main(url: str, output: str, model: str, format: str, saveaudio: bool, cpu: b
     if not url.startswith('https://youtube.com/watch?v=') and not url.startswith('https://www.youtube.com/watch?v='):
         print("Youtube video URLs look like https://youtube.com/watch?v=...")
         exit(1)
-    if output is None:
-        output = url.split('=')[-1]
-
     transcribe(url, output, model, format, saveaudio, cpu)
 
 if __name__ == "__main__":

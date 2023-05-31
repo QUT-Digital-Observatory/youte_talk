@@ -1,4 +1,4 @@
-# YouTalk: a tool for transcribing YouTube videos
+# YouTalk (youte_talk): a tool for transcribing YouTube videos
 
 YouTalk is a simple command line program for transcribing YouTube videos. That is, it downloads the audio from a YouTube video and produces a transcript in a variety of formats including plain text, time-stamped SRT text caption format, JSON and CSV.
 
@@ -57,4 +57,38 @@ There's also the option of running Whisper on a CPU. This is much slower, but th
 * CPU, large model: 3m 30s
 
 Note, you can always try on the GPU first, and if it fails due to memory constraints (you will see a cuda memory allocation error), just re-run the command with the `--cpu` switch.
+
+## Installing from Git (for dev etc)
+
+`git clone https://github.com/QUT-Digital-Observatory/youte_talk.git`
+`cd youte_talk`
+`python3 -m venv venv`
+`source venv/bin/activate`
+`pip install -e .`
+
+## Using as a Python module
+
+You can also use YouTalk as a module. The main function is `youtalk.transcribe` which takes a YouTube URL and returns a transcript as a string. You can also specify the output format and the model to use. For example:
+
+To transcribe a video and save the output to a file called `transcript.txt`:
+
+```python:
+from youte_talk.transcriber import Transcriber
+
+transcriber = Transcriber('https://www.youtube.com/watch?v=9bZkp7q19f0', output='transcript', model='small')
+transcriber.transcribe()
+```
+
+To transcribe an audio file with the CPU and retrieve a list of Segment dataclasses:
+
+```python:
+from youte_talk.whisper import WhisperTranscribe
+
+whisper = WhisperTranscribe('filename.webm', prompt = 'A meeting transcript', cpu = True)
+for segment in whisper.segments:
+    print(segment.start,':', segment.text)
+```
+
+The WhisperTranscribe class also returns strings in various formats as .text, srt, .csv and .json properties.
+
 

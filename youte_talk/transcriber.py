@@ -11,11 +11,11 @@ import youtube_dl
 from datetime import timedelta
 
 class Transcriber:
-    def __init__(self, url: str, output: str, model: str, fformat: str, saveaudio: bool, cpu: bool):
+    def __init__(self, url: str, output: str | None = None, model: str = 'small', fformat: str = 'small', saveaudio: bool = False, cpu: bool = False):
         """Set up a Transcription job"""
         print('url:', url)
         self.url = url
-        self.output = output
+        self.output = url.split('=')[-1] if output is None else output 
         self.model = model
         self.format = fformat
         self.saveaudio = saveaudio
