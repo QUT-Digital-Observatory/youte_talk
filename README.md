@@ -1,6 +1,6 @@
-# YouTalk (youte_talk): a tool for transcribing YouTube videos
+# Youte_talk: a tool for transcribing YouTube videos
 
-YouTalk is a simple command line program for transcribing YouTube videos. That is, it downloads the audio from a YouTube video and produces a transcript in a variety of formats including plain text, time-stamped SRT text caption format, JSON and CSV.
+Youte_talk, or YouTalk for short, is a simple command line program for transcribing YouTube videos. That is, it downloads the audio from a YouTube video and produces a transcript in a variety of formats including plain text, time-stamped SRT text caption format, JSON and CSV. It is a member of the [Youte](https://github.com/QUT-Digital-Observatory/youte) family of tools for working with YouTube data.
 
 ## Why YouTalk?
 
