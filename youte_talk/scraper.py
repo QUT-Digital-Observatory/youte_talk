@@ -1,3 +1,7 @@
+"""
+Copyright: Digital Observatory 2023 <digitalobservatory@qut.edu.au>
+Author: Mat Bettinson <mat.bettinson@qut.edu.au>
+"""
 import requests
 from bs4 import BeautifulSoup
 import json

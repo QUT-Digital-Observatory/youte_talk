@@ -1,3 +1,7 @@
+"""
+Copyright: Digital Observatory 2023 <digitalobservatory@qut.edu.au>
+Author: Mat Bettinson <mat.bettinson@qut.edu.au>
+"""
 import whisper
 from dataclasses import dataclass
 from typing import TypedDict
@@ -119,3 +123,8 @@ class WhisperTranscribe:
             srt_str += f"{i+1}\n{str_start_time} --> {str_end_time}\n{segment['text'].strip()}\n\n"
 
         return srt_str
+
+
+
+
+    

@@ -2,15 +2,27 @@
 Copyright: Digital Observatory 2023 <digitalobservatory@qut.edu.au>
 Author: Mat Bettinson <mat.bettinson@qut.edu.au>
 """
-from os import getenv
 import click
 from sys import exit
-from youte_talk.transcriber import Transcriber
+import subprocess
+import os
 
 def transcribe(*args):
+    from youte_talk.transcriber import Transcriber
     trans = Transcriber(*args)
     trans.transcribe()
     print("Done!")
+
+def is_ffmpeg_available():
+    try:
+        # The "which" command is used to find out if a system command exists.
+        # It's used here to check if ffmpeg is available.
+        # This works on Unix/Linux/Mac systems. On Windows, it's "where".
+        command = 'where' if os.name == 'nt' else 'which'
+        subprocess.check_output([command, 'ffmpeg'])
+        return True
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return False
 
 whispermodels = ['tiny', 'tiny.en', 'base', 'base.en', 'small', 'small.en', 'medium', 'medium.en', 'large']
 
@@ -26,6 +38,14 @@ def main(url: str, output: str, model: str, format: str, saveaudio: bool, cpu: b
     if not url.startswith('https://youtube.com/watch?v=') and not url.startswith('https://www.youtube.com/watch?v='):
         print("Youtube video URLs look like https://youtube.com/watch?v=...")
         exit(1)
+
+    if not is_ffmpeg_available():
+        print("\nYoute_Talk requires ffmpeg but it is not available!\n")
+        print(" - See https://ffmpeg.org/download.html for installation instructions")
+        print(" - On Windows, you may need to add ffmpeg to your PATH")
+        print(" - On Linux, you may need to install ffmpeg with your package manager")
+        exit(1)
+
     transcribe(url, output, model, format, saveaudio, cpu)
 
 if __name__ == "__main__":

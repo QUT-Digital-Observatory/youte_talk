@@ -17,6 +17,14 @@ YouTalk requires Python 3.10 or later. It is recommended to use a virtual enviro
 
 `pip install youte-text`
 
+Please note: YouTalk's Whisper dependency includes a PyTorch installation which is very large and takes a while to install. This is unfortunately the norm for GPU compute tools, even if you're only going to use the CPU.
+
+An ffmpeg installation is also required.
+
+* On Windows see https://ffmpeg.org/download.html
+* On Mac, `brew install ffmpeg`
+* On Linux, `sudo apt install ffmpeg` or similar depending on your package manager
+
 ## Usage
 
 After installing, you can run `youtalk` from the command line. You must provide a YouTube URL. You can also specify the output format, the output file name, and the Whisper model to use. The default is to use the small model and output a text file with the same name as the video ID.
@@ -39,6 +47,8 @@ Options:
 
 Note, if using the --saveaudio switch, the audio file will be saved in the current working directory with the name `videoId.webm`.
 If you run YouTalk again on the same video, it will not download the audio again, but will use the existing file.
+
+Note: The webm files served by YouTube are encoded with the [Opus](https://opus-codec.org/) codec, Youte_Talk saves the stream without transcoding. Opus has excellent low-bitrate performance for speech.
 
 ## Whisper and performance
 

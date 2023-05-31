@@ -6,7 +6,6 @@ from time import time
 from youte_talk.scraper import get_VideoDetails
 from os import remove, rename, path
 from youte_talk.whisper import WhisperTranscribe
-#from youtalk.parser import parse_srt
 import youtube_dl
 from datetime import timedelta
 
