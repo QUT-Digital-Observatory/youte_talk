@@ -89,8 +89,9 @@ def main(url: str, output: str, model: str, format: str, saveaudio: bool, cpu: b
     if not url.startswith("https://youtube.com/watch?v=") and not url.startswith(
         "https://www.youtube.com/watch?v="
     ):
-        print("Youtube video URLs look like https://youtube.com/watch?v=...")
-        exit(1)
+        raise click.BadArgumentUsage(
+            "YouTube video URLs must look like https://youtube.com/watch?v=..."
+        )
 
     if not is_ffmpeg_available():
         print("\nYoute_Talk requires ffmpeg but it is not available!\n")
