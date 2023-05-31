@@ -5,6 +5,7 @@ import json
 import csv
 import io
 from datetime import timedelta
+from torch.cuda import is_available
 
 # How hard was that OpenAI? Types. It's not hard.
 class WhisperSegment(TypedDict):
@@ -29,6 +30,9 @@ class Segment:
 class WhisperTranscribe:
     def __init__(self, sourcefile: str, prompt: str | None = None, modelname: str = "small", cpu: bool = False):
         self.segmentlist = []
+        if cpu == False and is_available() == False:
+            print("CUDA is not available. Falling back to CPU.")
+            cpu = True
         model = whisper.load_model(modelname, device='cpu' if cpu else 'cuda')
         # This doesn't return what OpenAI says it does
         result = model.transcribe(sourcefile, initial_prompt=prompt)
