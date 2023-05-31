@@ -62,25 +62,25 @@ whispermodels = [
     "--model",
     type=click.Choice(whispermodels, case_sensitive=True),
     default="small",
-    help="Whisper model to use (defaults to small)",
+    help="Whisper model to use",
+    show_default=True,
 )
 @click.option(
     "--format",
     type=click.Choice(["text", "srt", "csv", "json"], case_sensitive=False),
     default="text",
     help="Format of output file: text, srt or json",
+    show_default=True,
 )
 @click.option(
     "--saveaudio",
     is_flag=True,
-    show_default=True,
     default=False,
     help="Save the audio stream to a webm file",
 )
 @click.option(
     "--cpu",
     is_flag=True,
-    show_default=True,
     default=False,
     help="Use the CPU instead of the GPU",
 )
